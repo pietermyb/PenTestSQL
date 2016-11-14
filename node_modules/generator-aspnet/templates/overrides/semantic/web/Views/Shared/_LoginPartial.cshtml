@@ -1,0 +1,27 @@
+@using Microsoft.AspNetCore.Identity
+@using <%= namespace %>.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="right menu">
+        <div class="item"><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a></div>
+        <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="item">
+            <button type="submit" class="ui button">Log off</button>
+        </form>
+    </div>
+
+}
+else
+{
+    <div class="right menu">
+        <div class="item">
+            <a class="ui button" href="/Account/Login">Log in</a>
+        </div>
+        <div class="item">
+            <a class="ui primary button" href="/Account/Register">Sign Up</a>
+        </div>
+    </div>
+}
